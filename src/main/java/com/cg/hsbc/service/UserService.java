@@ -20,5 +20,6 @@ import com.cg.hsbc.exceptions.UserException;
 	  void activateAccount(Long userId) throws UserException;
 	  void deactivateAccount(Long userId) throws UserException;
 	List<User> getAllUsers() throws UserException;
+	void deleteUserById(Long userId) throws UserException;
 	 
 }

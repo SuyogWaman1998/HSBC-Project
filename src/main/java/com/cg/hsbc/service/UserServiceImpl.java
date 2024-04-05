@@ -33,6 +33,14 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	
+	@Override
+	public void deleteUserById(Long userId) throws UserException {
+		// TODO Auto-generated method stub
+		
+		userDao.deleteById(userId);
+		
+	}
 	@Override
 	public User updateUser(User user) throws UserException {
 		// TODO Auto-generated method stub
@@ -86,6 +94,8 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 
 
