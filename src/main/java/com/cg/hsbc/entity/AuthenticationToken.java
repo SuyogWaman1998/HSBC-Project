@@ -1,8 +1,9 @@
 package com.cg.hsbc.entity;
 
 import java.sql.Date;
+import javax.persistence.*;
 
-import jakarta.persistence.*;
+
 
 @Entity
 @Table(name="auth_tokens")

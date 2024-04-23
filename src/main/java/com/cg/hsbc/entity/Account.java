@@ -2,7 +2,8 @@ package com.cg.hsbc.entity;
 
 import java.sql.*;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+import javax.persistence.GenerationType;
 
 @Entity
 @Table(name="accounts")

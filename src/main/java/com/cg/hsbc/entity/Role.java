@@ -1,8 +1,8 @@
 package com.cg.hsbc.entity;
 
 import java.util.Set;
+import javax.persistence.*;
 
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "roles")
@@ -16,25 +16,28 @@ public class Role {
 
 	private String roleDescription;
 
-//	@OneToMany(mappedBy = "role") // mappedBy attribute is used to specify the field in the User class that owns
-//									// the relationship
-//	private Set<User> users; // Collection of users associated with this role
+	@ManyToMany(mappedBy = "roles") // mappedBy attribute is used to specify the field in the User class that owns
+									// the relationship
+	private Set<User> users; // Collection of users associated with this role
 
 	public Role() {
 		super();
 	}
 
-	public Role(Long roleId, String roleName, String roleDescription) {
+	public Role(Long roleId, String roleName, String roleDescription, Set<User> users) {
 		super();
 		this.roleId = roleId;
 		this.roleName = roleName;
 		this.roleDescription = roleDescription;
+		this.users=users;
 
 	}
-
+	
+	
 	@Override
 	public String toString() {
-		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleDescription=" + roleDescription + "]";
+		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleDescription=" + roleDescription + ", users="
+				+ users + "]";
 	}
 
 	public Long getRoleId() {
@@ -61,12 +64,12 @@ public class Role {
 		this.roleDescription = roleDescription;
 	}
 
-//	public Set<User> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(Set<User> users) {
-//		this.users = users;
-//	}
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 
 }

@@ -1,10 +1,12 @@
 package com.cg.hsbc.entity;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "users")
@@ -33,16 +35,18 @@ public class User implements Serializable {
 	private Date dateOfBirth;
 
 	
-	 @ManyToOne
-	    @JoinColumn(name = "role_id") // Foreign key column name
-	    private Role role; // Change from Set<Role> to Role
+	 @ManyToMany(fetch= FetchType.LAZY)
+	 @JoinTable(name = "user_roles",
+	 joinColumns = @JoinColumn(name= "user_id"),
+	 inverseJoinColumns = @JoinColumn(name="role_id"))
+	    private Set<Role> roles= new HashSet<>();
 
 	public User() {
 		super();
 	}
 
 	public User(Long userId, String username, String password, String userEmailId, String gender, Date dateOfBirth,
-			Date createdAt, Date lastLogin, Role role) {
+			Date createdAt, Date lastLogin, Role role, Set<Role> roles) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -50,7 +54,7 @@ public class User implements Serializable {
 		this.userEmailId = userEmailId;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
-		this.role = role;
+		this.roles = roles;
 	}
 
 	 public Long getUserId() {
@@ -101,19 +105,23 @@ public class User implements Serializable {
 	        this.dateOfBirth = dateOfBirth;
 	    }
 
-	    public Role getRole() {
-	        return role;
-	    }
+	   
 
-	    public void setRole(Role role) {
-	        this.role = role;
-	    }
+		public Set<Role> getRoles() {
+			return roles;
+		}
+
+		public void setRoles(Set<Role> roles) {
+			this.roles = roles;
+		}
 
 		@Override
 		public String toString() {
 			return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", userEmailId="
-					+ userEmailId + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", role=" + role + "]";
+					+ userEmailId + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", roles=" + roles + "]";
 		}
+
+		
 
 
 }

@@ -29,14 +29,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User deleteUser(User user) throws UserException {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return userDao.saveAndFlush(user);
 	}
 
 	
 	@Override
 	public void deleteUserById(Long userId) throws UserException {
-		// TODO Auto-generated method stub
+	
 		
 		userDao.deleteById(userId);
 		
